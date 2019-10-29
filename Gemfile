@@ -31,5 +31,11 @@ group :development do
   gem 'web-console', '>= 3.3.0'
 end
 
+group :debug do
+  gem 'ruby-debug-ide', '>= 0.6.0'
+  gem 'debase'
+end
+
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
