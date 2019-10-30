@@ -6,7 +6,7 @@ class AuthorsController < ApplicationController
     def create
         @author = Author.new(params.require(:author).permit(:first_name, :last_name, :homepage))
         if @author.save
-            redirect_to root_path, notice: 'Success!' 
+            redirect_to authors_path, notice: 'Success!' 
         else
             render 'new'
         end
@@ -33,4 +33,9 @@ class AuthorsController < ApplicationController
           render 'edit'
         end
       end
+    def destroy
+        @author = Author.find(params[:id])
+        @author.destroy
+        redirect_to authors_path
+    end
 end
