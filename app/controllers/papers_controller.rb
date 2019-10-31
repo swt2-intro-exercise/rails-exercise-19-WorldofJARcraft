@@ -17,6 +17,7 @@ class PapersController < ApplicationController
 
   # GET /papers/1/edit
   def edit
+    @authors_of_paper = get_ids_of_authors(Paper.find(params["id"]))
   end
 
   # POST /papers
@@ -53,7 +54,8 @@ class PapersController < ApplicationController
     @paper.destroy
     redirect_to papers_url, notice: 'Paper was successfully destroyed.'
   end
-
+  
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_paper
@@ -77,4 +79,13 @@ class PapersController < ApplicationController
         end
         return true
     end
+
+    def get_ids_of_authors(paper)
+      ids = Array.new
+      for author in paper.authors
+        ids.push (author.id)
+      end
+      return ids
+    end
+    
 end

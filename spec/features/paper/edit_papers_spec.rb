@@ -39,5 +39,11 @@ describe "Show author page", type: :feature do
     @paper.reload
     expect(@paper.authors).to be_empty
   end 
+
+  it "highlights current authors" do
+    visit edit_paper_path(@paper)
+    expect(find(:xpath, '//option[@selected="selected"]/text()').text).to eq(@paper.authors.first.name)
+
+  end 
   
 end

@@ -27,7 +27,7 @@
   </div>
 
   <%= form.select 'author_ids',
-  options_from_collection_for_select(Author.all, :id, :name, paper.author_ids),
+  options_from_collection_for_select(Author.all, :id, :name, @authors_of_paper),
   {include_hidden: true},
   {multiple: true, size: 10, id: 'author_ids'} %>
 
