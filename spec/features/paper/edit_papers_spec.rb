@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Show author page", type: :feature do
+describe "Edit paper page", type: :feature do
   before do
     @paper = FactoryBot.create :paper
     authors = FactoryBot.create_list(:author, 2)
