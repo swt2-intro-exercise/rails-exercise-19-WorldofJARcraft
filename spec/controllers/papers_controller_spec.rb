@@ -53,7 +53,7 @@ RSpec.describe PapersController, type: :controller do
     end
   end
 
-  describe "GET #show" do
+  describe "GET #show" , type: :feature do
     it "returns a success response" do
       paper = Paper.create! valid_attributes
       get :show, params: {id: paper.to_param}, session: valid_session
