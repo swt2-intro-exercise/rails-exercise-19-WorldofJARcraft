@@ -1,4 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Paper Management System</h1>
+<<<<<<< HEAD
+<%= react_component 'Item' %>
+=======
 <%= react_component("HelloWorld", { greeting: "Hello from react-rails." }) %>
+>>>>>>> ts
