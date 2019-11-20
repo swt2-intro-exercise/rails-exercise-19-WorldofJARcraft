@@ -24,6 +24,7 @@ group :development, :test do
   gem 'factory_bot_rails', '~> 4.11.1'
   #for table selectors
   gem 'capybara_table'
+  gem 'sqlite3'
 end
 
 group :development do
