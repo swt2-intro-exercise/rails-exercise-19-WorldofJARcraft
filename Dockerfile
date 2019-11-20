@@ -28,4 +28,5 @@ RUN ./bin/rails webpacker:install && \
 
 EXPOSE 3000
 ENV RAILS_SERVE_STATIC_FILES=true
-CMD ["rails", "server", "-b", "0.0.0.0"]
+ENV PORT=3000
+CMD ["rails", "server", "-b", "0.0.0.0", "-p", "${PORT}"]

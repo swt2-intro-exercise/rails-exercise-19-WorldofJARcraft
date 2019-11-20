@@ -19,3 +19,5 @@ services:
       - USERNAME=someuser
       - PASSWORD=somepw
       - DATABASE=railsdb
+      - DBPORT=5432
+      - HOST=db
