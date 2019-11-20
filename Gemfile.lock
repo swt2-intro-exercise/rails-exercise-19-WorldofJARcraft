@@ -192,6 +192,11 @@ GEM
     turbolinks-source (5.2.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
+    uglifier (4.2.0)
+      execjs (>= 0.3.0, < 3)
+    uglifier-rails (3.2.0.rc2)
+      railties (>= 3.2.0.beta)
+      uglifier (>= 1.2.0)
     unicode-display_width (1.6.0)
     web-console (3.7.0)
       actionview (>= 5.0)
@@ -217,18 +222,23 @@ DEPENDENCIES
   capybara (>= 2.15)
   capybara_table
   debase
+  debase-ruby_core_source (= 0.10.6)
   factory_bot_rails (~> 4.11.1)
+  ffi (= 1.11.1)
   jquery-rails
   listen (>= 3.0.5, < 3.2)
-  mini_racer
+  mini_racer (= 0.2.6)
+  minitest (= 5.12.2)
+  nokogiri (= 1.10.4)
   pg
   puma (~> 3.11)
   rails (~> 5.2.3)
   react-rails
   rspec-rails (~> 3.8)
-  ruby-debug-ide (>= 0.6.0)
+  ruby-debug-ide (= 0.6.0)
   turbolinks (~> 5)
   tzinfo-data
+  uglifier-rails (>= 3.2.0.rc2)
   web-console (>= 3.3.0)
   webpacker
 

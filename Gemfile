@@ -9,7 +9,7 @@ gem 'rails', '~> 5.2.3'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # See https://github.com/rails/execjs#readme for more supported runtimes
-gem 'mini_racer', platforms: :ruby
+gem 'mini_racer', '= 0.2.6', platforms: :ruby
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -33,7 +33,6 @@ group :development do
 end
 
 group :debug do
-  gem 'ruby-debug-ide', '>= 0.6.0'
   gem 'debase'
   
 end
@@ -45,3 +44,10 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'webpacker'
 gem 'react-rails'
 gem 'jquery-rails'
+#TODO: Why did I need to add these manually?
+gem 'minitest', '= 5.12.2'
+gem 'nokogiri', '= 1.10.4'
+gem 'debase-ruby_core_source', '= 0.10.6'
+gem 'ffi', '= 1.11.1'
+gem 'ruby-debug-ide', '= 0.6.0'
+gem 'uglifier-rails', '>= 3.2.0.rc2'
