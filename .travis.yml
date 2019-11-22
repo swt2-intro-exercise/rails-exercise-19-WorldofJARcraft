@@ -7,7 +7,7 @@ services:
 - docker
 before_script:
  - export HOME="/home/travis"
- - sudo snap install heroku --classic
+ - curl https://toolbelt.heroku.com/install.sh | sudo sh
  #- gzip -dc docker/rails.tar.gz | docker load || true
  - env
 script:
@@ -17,5 +17,6 @@ script:
 #- docker run --name rails -e RAILS_ENV=test rails ./bin/rspec
 #- docker save rails | gzip > docker/rails.tar.gz || true
 after_success:
-- HEROKU_API_KEY="$APIKEY" heroku container:push web
-- HEROKU_API_KEY="$APIKEY" heroku container:release web
+- export APP="stark-basin-33709"
+- HEROKU_API_KEY="$APIKEY" heroku --app $APP container:push web
+- HEROKU_API_KEY="$APIKEY" heroku --app $APP container:release web
