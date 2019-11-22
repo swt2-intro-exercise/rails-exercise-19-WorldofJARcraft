@@ -18,5 +18,5 @@ script:
 #- docker save rails | gzip > docker/rails.tar.gz || true
 after_success:
 - export APP="stark-basin-33709"
-- HEROKU_API_KEY="$APIKEY" heroku --app $APP container:push web
-- HEROKU_API_KEY="$APIKEY" heroku --app $APP container:release web
+- HEROKU_API_KEY="$APIKEY" heroku container:push --app $APP web
+- HEROKU_API_KEY="$APIKEY" heroku container:release --app $APP web
