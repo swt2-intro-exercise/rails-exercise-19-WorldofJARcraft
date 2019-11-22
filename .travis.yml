@@ -5,13 +5,14 @@ cache:
 services:
 - docker
 before_script:
- - gzip -dc docker/rails.tar.gz | docker load || true
+ #- gzip -dc docker/rails.tar.gz | docker load || true
+ - env
 script:
 - env
 - echo ${RAILS_SECRET}
-- docker build -t rails:latest --build-arg secret=${RAILS_SECRET} --cache-from=rails:latest .
-- docker run --name rails -e RAILS_ENV=test rails ./bin/rspec
-- docker save rails | gzip > docker/rails.tar.gz || true
+#- docker build -t rails:latest --build-arg secret=${RAILS_SECRET} --cache-from=rails:latest .
+#- docker run --name rails -e RAILS_ENV=test rails ./bin/rspec
+#- docker save rails | gzip > docker/rails.tar.gz || true
 after_success:
 - echo "$APIKEY" | docker login -u $USERNAME --password-stdin $REGISTRY
 - ./build.sh
