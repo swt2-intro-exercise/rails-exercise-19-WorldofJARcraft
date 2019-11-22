@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'home#index'
+  get '/api' => 'time#index', defaults: { format: :json }
   resources :authors
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products

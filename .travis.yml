@@ -1,12 +1,23 @@
-language: ruby
-cache: bundler
+language: minimal
+sudo: required
+cache:
+ directories:
+  - docker
+services:
+- docker
+before_script:
+ - export HOME="/home/travis"
+ - curl https://toolbelt.heroku.com/install.sh | sudo sh
+ #- gzip -dc docker/rails.tar.gz | docker load || true
+ - env
 script:
- - RAILS_ENV=test bundle exec rails db:migrate
- - bundle exec rspec spec/
-before_install:
- - python -V
- - pip -V
- - sudo pip install -r travis/requirements.txt
- - python ./travis/try_issues.py
+- env
+- echo ${RAILS_SECRET}
+#- docker build -t rails:latest --build-arg secret=${RAILS_SECRET} --cache-from=rails:latest .
+#- docker run --name rails -e RAILS_ENV=test rails ./bin/rspec
+#- docker save rails | gzip > docker/rails.tar.gz || true
 after_success:
- - ./travis/travis_commands
+- export APP="stark-basin-33709"
+- echo "$APIKEY" | docker login $REGISTRY -u $USERNAME --password-stdin
+- HEROKU_API_KEY="$APIKEY" heroku container:push --app $APP web
+- HEROKU_API_KEY="$APIKEY" heroku container:release --app $APP web
