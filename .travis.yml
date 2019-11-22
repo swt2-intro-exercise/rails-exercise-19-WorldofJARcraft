@@ -1,12 +1,9 @@
 language: ruby
 cache: bundler
+services: 
+   - docker
 script:
- - RAILS_ENV=test bundle exec rails db:migrate
- - bundle exec rspec spec/
-before_install:
- - python -V
- - pip -V
- - sudo pip install -r travis/requirements.txt
- - python ./travis/try_issues.py
+ - ./build.sh
+ - docker run --name rails -e RAILS_ENV=test rails ./bin/rspec
 after_success:
- - ./travis/travis_commands
+ - echo "Done"
