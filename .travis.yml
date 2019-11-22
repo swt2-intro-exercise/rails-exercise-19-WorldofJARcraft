@@ -1,9 +1,12 @@
 language: ruby
 cache: bundler
-services: 
-   - docker
+services:
+- docker
 script:
- - ./build.sh
- - docker run --name rails -e RAILS_ENV=test rails ./bin/rspec
+- docker build -t rails:latest --build-arg secret=${RAILS_SECRET}.
+- docker run --name rails -e RAILS_ENV=test rails ./bin/rspec
 after_success:
- - echo "Done"
+- echo "Done"
+env:
+  matrix:
+    secure: RNnNiCfYBtuyGgTsRjPqrSHjaYu78+a99fnoN0lInj1yPngc0FaPdueTSFtGFAV4CtdwdKgVswzE3/CY/AhPxhaGUaabp6dMvN+faVorEAxqvKeIQ0lNC4CzYkv3qHJb8TcPi5Ju4u8esaAvl6AfbiPYzbki8ngCJBpnWaqnU099b+dQzIRIi10GC+5GaCzXaV1r4tZ7Mywc8AN89bheRG7xlr8Za7QE+wZ9L8d7eyhxHU13UQuKa18BnmRgchTqt+Six+jnqOTDs81oW9HqTtp3DgLEdgo+TOTpMjBgWC/SToY7d0S2wogsL0cBOQoMyhDCPifLlFhpU/h5JpYzzx/SE8+9rKkQuWVWOXLHlpX9nor7qZJsqvWnk8+9U8eM9+8IdlrhKF1oiX6XIhMPekiakDy+y03YpOjuViLimIaBkW6kJi40fcY60BvE1XP0S5uMGep/bNIbV8MgayH9yaTsi+nYbVICC8IgWmpjccIf4t5KIF9zIZVIEAZbz6Bf2w8ckTB/zRJQrabIgWpF3NHYiJ2U5Y5mxcm2iKxl4PITSFrw6plCNyO5lwt3uJHVoeSMrjIuKIz/li7ooHlRrD6ct84QdYB/A1LslGmnN6WOdQxV2cq0fp4WCXFk1aY1TEf+9SkmjY/jysoso0KyK9CU4MSHog3+waifIWKnPE4=
