@@ -1,4 +1,5 @@
-id=$(docker inspect rails --format={{.Id}})
+id=$(docker inspect registry.heroku.com/$APP/web --format={{.Id}})
+echo "image id: $id"
 curl -n -X PATCH https://api.heroku.com/apps/$APP/formation \
   -d '{
   "updates": [
