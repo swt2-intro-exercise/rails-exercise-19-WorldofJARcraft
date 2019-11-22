@@ -6,6 +6,7 @@ cache:
 services:
 - docker
 before_script:
+ - export HOME="/home/travis"
  - sudo snap install heroku --classic
  #- gzip -dc docker/rails.tar.gz | docker load || true
  - env
