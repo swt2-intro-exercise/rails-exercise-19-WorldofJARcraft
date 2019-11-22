@@ -14,8 +14,7 @@ script:
 - docker save rails | gzip > docker/rails.tar.gz || true
 deploy:
   provider: heroku
-  api_key:
-    secure: iVMif1/20zVp0XqW5Bd1uPvpD+Xkz4PnJ8KcCJnTO15A6NtzNxcdJGhgaIeU2adNgIv22TwAREJa4+kmgm068NshpR+EtauWjd8dcBG1S8LlpXWXIcSDWYEQi2oLm73EJJ0qbdVSRrv2iLRFZa0d3HqHTXQrcieseu5B0fMu03Xcc9fLOAq6B/Ur1665/I3YPxyxeaOk4wvsRgh+F7TUi5q/8SkVhK2kyMKXyyo19LpNeI7GYpXoEf8IT67x0M6EnOMQpv+KqfXoB1Nvxtu2Dv4CzjxiRhyzUsdypVqZp87wHEHj4ohKxVDahYjMtmHzb0OQnBWRJCmCTm7O2K5DJUyRbAPKwwI+WJiZW8+UUh8qWfaCRxzB8qrf8emeoE4J5+FGSx64y6ipaPgJxn89dGkPuXresB7wR9pXi0x35EIW8KHK6rCtNqZ3FiV0EMqeWnXd4IPoKN6ZKxNhvkFw7I1aKoYdgFLrr83aJKiav8AcOKL41btJiInnIH0l7EmhpFgc2QL2e3okOQbNgAasr+XlcrDbv1X+K2pCwQJqW10MAIDpD+wnC3sK0agIH5Fn3t4gG10J6QZunUnp09Al6/nyVv11p3l8d48TiKfJFhBTjHNLaAuYkUrHMGVVQmxD1/jPQzF1Xm2tvFcfhHyAb5KTJjzPU3vdB8DIrHugnMY=
+  api_key: $APIKEY
   run:
   - heroku container:login
   - heroku container:push web
