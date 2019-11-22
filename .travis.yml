@@ -12,8 +12,8 @@ script:
 - docker build -t rails:latest --build-arg secret=${RAILS_SECRET} --cache-from=rails:latest .
 - docker run --name rails -e RAILS_ENV=test rails ./bin/rspec
 - docker save rails | gzip > docker/rails.tar.gz || true
-deploy:
-  provider: heroku
-  api_key: $APIKEY
-  app: stark-basin-33709
-  skip_cleanup: true
+after_success:
+- echo "$APIKEY" | docker login -u $USERNAME --password-stdin $REGISTRY
+- ./build.sh
+- docker tag rails:latest registry.heroku.com/stark-basin-33709/web
+- docker push registry.heroku.com/stark-basin-33709/web
