@@ -1,15 +1,22 @@
 language: ruby
-cache: bundler
+cache:
+ directories:
+  - docker
 services:
 - docker
+before_script:
+ - gzip -dc docker/rails.tar.gz | docker load || true
 script:
 - env
 - echo ${RAILS_SECRET}
 - docker build -t rails:latest --build-arg secret=${RAILS_SECRET} .
 - docker run --name rails -e RAILS_ENV=test rails ./bin/rspec
+- docker save rails | gzip > docker/rails.tar.gz || true
 deploy:
   provider: heroku
   api_key:
-    secure: B4gn6q4OaOK1jUKgnIU28XB0t+OVU7EJJDTmSkEPsb69XpPtY6dcDB4kN8imOVqeK0IiLtvHRuRKJ55wRFzoMNL43UbWrD4xDvJaIpgxAQ7SQjjvjq+5mXuz6ijaYMyWfakcS7Pa5FuFrjL3gT15fQOgMcyTpyHJ1Azm7XK8T9lhjsNQEdXpRIq4W9f6qdft3hk4/5QWZCRC/aM8C5hlvQim2cyLQz/dlBlwnfTQnioyW8eD4toRTM0+SrTXqtxjk/Z6axOVGH+M8NEH3zhLuQVHoxriz0dTyAGgROvawD2K3JTQoT7YLEqlnrfHbKRr5neBW45k8LIgRlUWPSHsmNnm3hkaq43uBpd+z5R2sKd1B89oPNNx0F/RNuq5rGKf9IbXWDqHITGFvtBzjzT7GclWHV7GjGW+jVmt49pENBH1YjFotRqPZ0CrZ6HsMiV3pUxQO3aXD4QHdf+6jLzZvrB+sC2zjs3YI3xMG/4cyMv6tvY7XlkIQgnYLoxrZI6RU5NnjYby9bwo3o0DqNhnHt3q41W+x9FD86rKCeUcPBifbBUj/EM4xOdyl/yOmqggQIB8WGqjJHQf4SG0Qyb+4n/9YTBSoVmj0H31hN2X73AtKZkgRuaEThJPUmIn0xhIuLTaLC/zhi3gkAn+sdJU9/r7W97bj8qjG9nLFHVjbXQ=
+    secure: iVMif1/20zVp0XqW5Bd1uPvpD+Xkz4PnJ8KcCJnTO15A6NtzNxcdJGhgaIeU2adNgIv22TwAREJa4+kmgm068NshpR+EtauWjd8dcBG1S8LlpXWXIcSDWYEQi2oLm73EJJ0qbdVSRrv2iLRFZa0d3HqHTXQrcieseu5B0fMu03Xcc9fLOAq6B/Ur1665/I3YPxyxeaOk4wvsRgh+F7TUi5q/8SkVhK2kyMKXyyo19LpNeI7GYpXoEf8IT67x0M6EnOMQpv+KqfXoB1Nvxtu2Dv4CzjxiRhyzUsdypVqZp87wHEHj4ohKxVDahYjMtmHzb0OQnBWRJCmCTm7O2K5DJUyRbAPKwwI+WJiZW8+UUh8qWfaCRxzB8qrf8emeoE4J5+FGSx64y6ipaPgJxn89dGkPuXresB7wR9pXi0x35EIW8KHK6rCtNqZ3FiV0EMqeWnXd4IPoKN6ZKxNhvkFw7I1aKoYdgFLrr83aJKiav8AcOKL41btJiInnIH0l7EmhpFgc2QL2e3okOQbNgAasr+XlcrDbv1X+K2pCwQJqW10MAIDpD+wnC3sK0agIH5Fn3t4gG10J6QZunUnp09Al6/nyVv11p3l8d48TiKfJFhBTjHNLaAuYkUrHMGVVQmxD1/jPQzF1Xm2tvFcfhHyAb5KTJjzPU3vdB8DIrHugnMY=
   run:
-  - echo "Hallo"
+  - heroku container:login
+  - heroku container:push web
+  - heroku container:release web
