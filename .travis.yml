@@ -3,7 +3,7 @@ cache: bundler
 services:
 - docker
 script:
-- docker build -t rails:latest --build-arg secret=${RAILS_SECRET}.
+- docker build -t rails:latest --build-arg secret=${RAILS_SECRET} .
 - docker run --name rails -e RAILS_ENV=test rails ./bin/rspec
 after_success:
 - echo "Done"
