@@ -14,7 +14,9 @@ script:
 #- docker run --name rails -e RAILS_ENV=test rails ./bin/rspec
 #- docker save rails | gzip > docker/rails.tar.gz || true
 after_success:
+- export APP="stark-basin-33709"
 - echo "$APIKEY" | docker login -u $USERNAME --password-stdin $REGISTRY
 - ./build.sh
-- docker tag rails:latest registry.heroku.com/stark-basin-33709/web
-- docker push registry.heroku.com/stark-basin-33709/web
+- docker tag rails:latest registry.heroku.com/$APP/web
+- docker push registry.heroku.com/$APP/web
+- ./deploy.sh
