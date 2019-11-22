@@ -17,7 +17,3 @@ deploy:
   api_key: $APIKEY
   app: stark-basin-33709
   skip_cleanup: true
-  run:
-  - heroku container:login
-  - heroku container:push web
-  - heroku container:release web
