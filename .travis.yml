@@ -1,10 +1,12 @@
 language: minimal
+sudo: required
 cache:
  directories:
   - docker
 services:
 - docker
 before_script:
+ - sudo snap install heroku --classic
  #- gzip -dc docker/rails.tar.gz | docker load || true
  - env
 script:
@@ -14,9 +16,5 @@ script:
 #- docker run --name rails -e RAILS_ENV=test rails ./bin/rspec
 #- docker save rails | gzip > docker/rails.tar.gz || true
 after_success:
-- export APP="stark-basin-33709"
-- echo "$APIKEY" | docker login -u $USERNAME --password-stdin $REGISTRY
-- ./build.sh
-- docker tag rails:latest registry.heroku.com/$APP/web
-- docker push registry.heroku.com/$APP/web
-- ./deploy.sh
+- HEROKU_API_KEY="$APIKEY" heroku container:push web
+- HEROKU_API_KEY="$APIKEY" heroku container:release web
