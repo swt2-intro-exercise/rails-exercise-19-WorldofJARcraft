@@ -1,4 +1,4 @@
-language: ruby
+language: minimal
 cache:
  directories:
   - docker
@@ -16,6 +16,7 @@ deploy:
   provider: heroku
   api_key: $APIKEY
   app: stark-basin-33709
+  skip_cleanup: true
   run:
   - heroku container:login
   - heroku container:push web
