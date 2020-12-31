@@ -47,7 +47,7 @@ gem 'react-rails'
 gem 'jquery-rails'
 #TODO: Why did I need to add these manually?
 gem 'minitest', '= 5.12.2'
-gem 'nokogiri', '= 1.10.4'
+gem 'nokogiri', '1.10.10'
 gem 'debase-ruby_core_source', '= 0.10.6'
 gem 'ffi', '= 1.11.1'
 gem 'ruby-debug-ide', '= 0.6.0'
